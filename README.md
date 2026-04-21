@@ -84,27 +84,13 @@ Crashes are boring. Functional frustration is the goal.
 You don’t win by causing the most damage.  
 You win by creating the most *elegant digital cruelty*.
 
-### Creativity  
-Original ideas over obvious hacks.
-
-### Subtlety  
-Best solutions feel almost normal.
-
-### Frustration Level  
-How bad does it feel to use?
-
-### Hackathon Spirit  
-Creative, technical, slightly evil.
+**The winner will be decided by the crowd.**
 
 ---
 
 ## 🎤 Final Presentation
 
-Each team presents:
-
-- **A:** What did you change?  
-- **B:** Why is it worse now?  
-- **C:** Which UX / accessibility principles did you ignore (on purpose)?  
+There will be no presentation ... 
 
 ---
 
