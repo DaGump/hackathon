@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eHealth Video Player</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1 class="demo-title">eHealth Video Player</h1>
+
+  <!-- ==================== PLAYER INSTANCE ==================== -->
+  <div id="my-player" class="a11y-player" role="application" aria-label="Video Player">
+    <div class="a11y-player__video-wrap">
+      <video
+        id="my-video"
+        preload="metadata"
+        crossorigin="anonymous"
+        poster="https://break72.app/movie/poster.jpg"
+      >
+        <source src="https://break72.app/movie/movie.mp4" type="video/mp4" />
+        <p>Your browser does not support HTML5 video. <a href="https://break72.app/movie/movie.mp4">Download the video</a>.</p>
+      </video>
+
+      <!-- Play overlay -->
+      <div class="a11y-player__overlay" aria-hidden="true">
+        <div class="a11y-player__overlay-icon"></div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="a11y-player__controls" role="toolbar" aria-label="Video controls">
+
+      <!-- Progress bar -->
+      <div
+        class="a11y-player__progress-wrap"
+        role="slider"
+        tabindex="0"
+        aria-label="Seek video"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+        aria-valuetext="0:00 of 0:00"
+      >
+        <div class="a11y-player__progress">
+          <div class="a11y-player__progress-buffered"></div>
+          <div class="a11y-player__progress-filled"></div>
+        </div>
+        <div class="a11y-player__progress-thumb"></div>
+        <div class="a11y-player__progress-tooltip">0:00</div>
+      </div>
+
+      <!-- Play / Pause -->
+      <button class="a11y-player__btn a11y-player__btn--play" type="button" aria-label="Play" data-action="playPause">
+        <span class="a11y-player__btn-tooltip">Play (k)</span>
+        <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></svg>
+      </button>
+
+      <!-- Mute / Unmute -->
+      <div class="a11y-player__volume-group">
+        <button class="a11y-player__btn a11y-player__btn--mute" type="button" aria-label="Mute" data-action="mute">
+          <span class="a11y-player__btn-tooltip">Mute (m)</span>
+          <svg class="icon-volume-high" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 8.5v7a4.49 4.49 0 002.5-3.5zm2.5 0a7 7 0 00-4-6.32v1.77A5.27 5.27 0 0117.5 12a5.27 5.27 0 01-2.5 4.55v1.77A7 7 0 0019 12z"/></svg>
+          <svg class="icon-volume-low" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 8.5v7a4.49 4.49 0 002.5-3.5z"/></svg>
+          <svg class="icon-volume-mute" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M16.5 12A4.5 4.5 0 0014 8.5v2.09l2.5 2.5A4.32 4.32 0 0016.5 12zM19 12a7 7 0 00-2.09-5l-1.42 1.42A4.94 4.94 0 0117.5 12a5 5 0 01-2 4l1.42 1.42A6.95 6.95 0 0019 12zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25a6.92 6.92 0 01-1.75 1.01v1.77a8.9 8.9 0 003.13-1.71L19.73 21 21 19.73l-9-9L4.27 3zM12 4l-2.09 2.09L12 8.18V4z"/></svg>
+        </button>
+        <div class="a11y-player__volume-slider-wrap">
+          <input
+            class="a11y-player__volume-slider"
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value="1"
+            aria-label="Volume"
+          />
+        </div>
+      </div>
+
+      <!-- Time -->
+      <div class="a11y-player__time" aria-live="off" aria-atomic="true">
+        <span class="a11y-player__time-current">0:00</span> / <span class="a11y-player__time-duration">0:00</span>
+      </div>
+
+      <div class="a11y-player__spacer"></div>
+
+      <!-- Captions -->
+      <div style="position:relative">
+        <button class="a11y-player__btn a11y-player__btn--captions" type="button" aria-label="Captions" aria-haspopup="true" data-action="captions">
+          <span class="a11y-player__btn-tooltip">Captions (c)</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm-8 12H8v-2h3v2zm6 0h-3v-2h3v2zm0-4H8V9h9v2z"/></svg>
+        </button>
+        <div class="a11y-player__captions-menu" role="menu" aria-label="Captions menu"></div>
+      </div>
+
+      <!-- Speed -->
+      <div style="position:relative">
+        <button class="a11y-player__btn a11y-player__btn--speed a11y-player__speed-btn" type="button" aria-label="Playback speed 1x" aria-haspopup="true" data-action="speed">
+          <span class="a11y-player__btn-tooltip">Speed (s)</span>
+          1x
+        </button>
+        <div class="a11y-player__speed-menu" role="menu" aria-label="Playback speed menu"></div>
+      </div>
+
+      <!-- Help -->
+      <button class="a11y-player__btn a11y-player__btn--help" type="button" aria-label="Keyboard shortcuts help" data-action="help">
+        <span class="a11y-player__btn-tooltip">Help (?)</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2a2 2 0 014 0c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg>
+      </button>
+
+      <!-- Fullscreen -->
+      <button class="a11y-player__btn a11y-player__btn--fullscreen" type="button" aria-label="Enter fullscreen" data-action="fullscreen">
+        <span class="a11y-player__btn-tooltip">Fullscreen (f)</span>
+        <svg class="icon-enter-fs" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+        <svg class="icon-exit-fs" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
+      </button>
+    </div>
+
+    <!-- Live announcer for screen readers -->
+    <div class="a11y-player__announcer" aria-live="assertive" aria-atomic="true"></div>
+
+    <!-- Keyboard help dialog -->
+    <div class="a11y-player__help-dialog" role="dialog" aria-label="Keyboard shortcuts" aria-modal="true">
+      <div class="a11y-player__help-content">
+        <h2>Keyboard Shortcuts</h2>
+        <table>
+          <thead>
+            <tr><th>Key</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><kbd>Space</kbd> / <kbd>k</kbd></td><td>Play / Pause</td></tr>
+            <tr><td><kbd>m</kbd></td><td>Mute / Unmute</td></tr>
+            <tr><td><kbd>←</kbd></td><td>Rewind 10 seconds</td></tr>
+            <tr><td><kbd>→</kbd></td><td>Forward 10 seconds</td></tr>
+            <tr><td><kbd>↑</kbd></td><td>Volume up</td></tr>
+            <tr><td><kbd>↓</kbd></td><td>Volume down</td></tr>
+            <tr><td><kbd>f</kbd></td><td>Toggle fullscreen</td></tr>
+            <tr><td><kbd>c</kbd></td><td>Toggle captions</td></tr>
+            <tr><td><kbd>s</kbd></td><td>Cycle playback speed</td></tr>
+            <tr><td><kbd>?</kbd></td><td>This help dialog</td></tr>
+            <tr><td><kbd>Esc</kbd></td><td>Close dialog / Exit fullscreen</td></tr>
+            <tr><td><kbd>Tab</kbd></td><td>Next control</td></tr>
+            <tr><td><kbd>Shift+Tab</kbd></td><td>Previous control</td></tr>
+          </tbody>
+        </table>
+        <button class="a11y-player__help-close" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="script.js" defer></script>
+</body>
+</html>
